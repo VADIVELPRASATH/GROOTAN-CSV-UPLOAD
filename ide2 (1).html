@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery File Upload Example</title>
+    <style>
+        table {
+            width: 90%;
+            border: 1px solid #ccc;
+            color: #888;
+            margin-top: 20px;
+            padding: 10px 0px 10px 0px;
+        }
+        
+        tr {
+            height: 30px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <input type="file" id="file-input" />
+
+    <h3>files:</h3>
+    <pre id="file-content">No data yet.</pre>
+
+    <script>
+        function readSingleFile(e) {
+            var file = e.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var contents = e.target.result;
+                displayContents(contents);
+            };
+            reader.readAsText(file);
+        }
+
+        function displayContents(contents) {
+            var element = document.getElementById('file-content');
+            element.textContent = contents;
+        }
+
+        document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+    </script>
+</body>
+
+</html>
